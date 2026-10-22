@@ -1,4 +1,4 @@
-function nip::commands::add() {
+function cli::commands::add() {
   local args=("$@")
   local arg
   local pkgbase
@@ -29,7 +29,7 @@ function nip::commands::add() {
 
   ARGS="$(jq -rn '$ARGS.positional' --args "${params[@]}")" \
   INPUTS_FILE="$(realpath "$inputsfile")" \
-    nix eval --raw --impure -f "$(module::resolve nip/commands/add.nix)" > "$tmpfile"
+    nix eval --raw --impure -f "$(module::resolve cli/commands/add.nix)" > "$tmpfile"
   if [[ "$?" != 0 ]]; then
     rm "$tmpfile"
     return 1

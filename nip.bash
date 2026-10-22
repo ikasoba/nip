@@ -4,6 +4,6 @@ __nip_root="$(dirname $(realpath $0))"
 
 . "$__nip_root/lib/module.bash"
 
-module::use nip/main.bash
+module::use cli/main.bash
 
-nip::main "$@"
+cli::main "$@"

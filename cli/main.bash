@@ -1,4 +1,4 @@
-function nip::main::help() {
+function cli::main::help() {
   printf 'NIP: Nix project manager\n\n'
   printf 'Commands:\n'
   printf '  add [-f <inputs-file>] <ref>\n'
@@ -8,7 +8,7 @@ function nip::main::help() {
   printf '    Show help\n'
 }
 
-function nip::main() {
+function cli::main() {
   local args=("$@")
   local arg
   local i
@@ -17,27 +17,27 @@ function nip::main() {
     arg="${args["$i"]}"
     case "$arg" in
       "-h"|"--help")
-        nip::main::help
+        cli::main::help
         return 0
         ;;
 
       "add")
         (( i++ ))
-        module::use nip/commands/add.bash
+        module::use cli/commands/add.bash
 
-        nip::commands::add "${args[@]:$i}"
+        cli::commands::add "${args[@]:$i}"
         return "$?"
         ;;
 
       *)
         printf 'Invalid argument: %s\n\n' "$arg"
-        nip::main::help
+        cli::main::help
         return 1        
         ;;
     esac
   done
 
   printf 'Argument required\n\n'
-  nip::main::help
+  cli::main::help
   return 1        
 }
